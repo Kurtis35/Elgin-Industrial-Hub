@@ -4,6 +4,25 @@
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
+## Artifacts
+
+### `artifacts/elgin-tool-gas` — Elgin Tool & Gas Website
+React + Vite marketing website for Elgin Tool & Gas. Dark industrial theme (black/grey/orange). Includes:
+- Sticky navbar with mobile hamburger menu
+- Hero section with CTA buttons (Call Now, WhatsApp)
+- Trust section (4 trust pillars)
+- Services grid (6 services)
+- About/Jeremy section
+- Product showcase grid (6 product categories)
+- Service areas (Grabouw, Botriver, Villiersdorp)
+- CTA section ("Need Gas Delivered Today?")
+- Footer with contact info and quick links
+- Floating WhatsApp button
+- Framer Motion animations throughout
+- SEO meta tags, Open Graph, JSON-LD structured data
+- Montserrat font via Google Fonts
+- No backend — purely frontend/static
+
 ## Stack
 
 - **Monorepo tool**: pnpm workspaces
