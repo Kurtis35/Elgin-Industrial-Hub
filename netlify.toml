@@ -1,6 +1,6 @@
 [build]
   command = "pnpm run build:netlify"
-  publish = "artifacts/elgin-tool-gas/dist/public"
+  publish = "dist/public"
 
 [[redirects]]
   from = "/*"

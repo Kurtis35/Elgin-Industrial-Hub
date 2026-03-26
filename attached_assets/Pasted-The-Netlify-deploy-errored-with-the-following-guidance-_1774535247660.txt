@@ -1,0 +1,108 @@
+The Netlify deploy errored, with the following guidance provided:
+
+Diagnosis
+- The build ran the Vite build inside the package folder artifacts/elgin-tool-gas (see [line 72](#L72)) and produced dist/public files inside that package (see [lines 80–82](#L80-L82)).
+- Netlify is configured to publish dist/public at the repo root (resolved as /opt/build/repo/dist/public) but that directory does not exist because the build output is under artifacts/elgin-tool-gas/dist/public (see [line 102](#L102)). This mismatch causes the failing deploy: "Deploy directory 'dist/public' does not exist" (see [line 96](#L96)).
+
+Root cause: publish directory mismatch — Netlify expects dist/public at the repo root but the build outputs to artifacts/elgin-tool-gas/dist/public.
+
+Solution
+Pick one of the two options below. Option A is the simplest.
+
+Option A — Change Netlify publish directory (recommended)
+1. Set Netlify's publish directory to the actual build output:
+   - In the Netlify UI: Site settings → Build & deploy → Build settings → Publish directory: artifacts/elgin-tool-gas/dist/public
+   - Or add (or update) a netlify.toml in your repo root and commit:
+
+```toml
+# netlify.toml
+[build]
+  command = "pnpm run build:netlify"
+  publish = "artifacts/elgin-tool-gas/dist/public"
+```
+
+2. Redeploy. Confirm logs show the publish directory path and that artifacts/elgin-tool-gas/dist/public is present.
+
+Option B — Change the build to output to the repo-level publish directory
+1. Edit the Vite config in artifacts/elgin-tool-gas/vite.config.ts to set build.outDir to point to the repo-level folder (example output path relative to the package):
+
+```ts
+// artifacts/elgin-tool-gas/vite.config.ts (example)
+export default defineConfig({
+  build: {
+    outDir: "../../dist/public", // two levels up into repo root /dist/public
+    // ...other build options
+  },
+});
+```
+
+2. Commit and redeploy. Netlify's existing publish: dist/public will then match the produced output.
+
+Verification
+- After making the change, redeploy and check the build logs to confirm the publish directory exists (the build log should list the dist/public files or the package-level path you configured).
+
+Notes
+- I only changed the publish path or the Vite outDir; you do not need to add packages or alter external configs for this issue.
+- If you need to change Node versions on Netlify, follow Netlify docs: https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
+
+The relevant error logs are:
+
+Line 0: build-image version: a0bc76c99cbadd99a168cf193f4d4df9fa7ee94a (noble-new-builds)
+Line 1: buildbot version: fbebc7d9335e413478334a6e6a4e8e1087eed35b
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/Kurtis35/Elgin-Industrial-Hub
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Installing dependencies
+Line 9: mise [36m~/.config/mise/config.toml[0m tools: [34mpython[0m@3.14.3
+Line 10: mise [36m~/.config/mise/config.toml[0m tools: [34mruby[0m@3.4.8
+Line 11: mise [36m~/.config/mise/config.toml[0m tools: [34mgo[0m@1.26.1
+Line 12: Downloading and installing node v22.22.2...
+Line 13: Downloading https://nodejs.org/dist/v22.22.2/node-v22.22.2-linux-x64.tar.xz...
+Line 67: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 68: ​
+Line 69: [36m$ pnpm run build:netlify[39m
+Line 70: > workspace@0.0.0 build:netlify /opt/build/repo
+Line 71: > pnpm --filter @workspace/elgin-tool-gas run build:netlify
+Line 72: > @workspace/elgin-tool-gas@0.0.0 build:netlify /opt/build/repo/artifacts/elgin-tool-gas
+Line 73: > BASE_PATH=/ vite build --config vite.config.ts
+Line 74: [36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+Line 75: transforming...
+Line 76: [32m✓[39m 2176 modules transformed.
+Line 77: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 78: rendering chunks...
+Line 79: computing gzip size...
+Line 80: [2mdist/public/[22m[32mindex.html                 [39m[1m[2m  2.78 kB[22m[1m[22m[2m │ gzip:   1.02 kB[22m
+Line 81: [2mdist/public/[22m[2massets/[22m[35mindex-BpxDFElk.css  [39m[1m[2m110.47 kB[22m[1m[22m[2m │ gzip:  17.82 kB[22m
+Line 82: [2mdist/public/[22m[2massets/[22m[36mindex-BQpUVs4-.js   [39m[1m[2m465.86 kB[22m[1m[22m[2m │ gzip: 148.24 kB[22m
+Line 83: [32m✓ built in 3.16s[39m
+Line 84: ​
+Line 85: [90m(build.command completed in 4.1s)[39m
+Line 86: [96m[1m​[22m[39m
+Line 87: [96m[1mDeploy site                                                   [22m[39m
+Line 88: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 89: ​
+Line 90: Section completed: deploying
+Line 91: [91m[1m​[22m[39m
+Line 92: [91m[1mConfiguration error                                           [22m[39m
+Line 93: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 94: ​
+Line 95:   [31m[1mError message[22m[39m
+Line 96:   Deploy did not succeed: Deploy directory 'dist/public' does not exist
+Line 97: ​
+Line 98:   [31m[1mResolved config[22m[39m
+Line 99:   build:
+Line 100:     command: pnpm run build:netlify
+Line 101:     commandOrigin: config
+Line 102:     publish: /opt/build/repo/dist/public
+Line 103:     publishOrigin: config
+Line 104:   redirects:
+Line 105:     - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+Line 106: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 107: Failing build: Failed to build site
+Line 108: Finished processing build request in 20.385s
