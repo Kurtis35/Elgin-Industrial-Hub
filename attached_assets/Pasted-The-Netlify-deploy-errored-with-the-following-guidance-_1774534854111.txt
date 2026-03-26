@@ -1,0 +1,115 @@
+The Netlify deploy errored, with the following guidance provided:
+
+Diagnosis
+
+- The build completed inside the workspace package artifacts/elgin-tool-gas (see the package build running in [line 71](#L71)-[line 72](#L72)), and Vite wrote a dist/public folder for that package (the dist listing appears at [line 79](#L79)-[line 81](#L81)).
+- Netlify failed the deploy because the configured publish directory is the repo root dist/public which does not exist at the repo root (error: "Deploy directory 'dist/public' does not exist" at [line 95](#L95) and resolved config showing publish: /opt/build/repo/dist/public at [line 101](#L101)-[line 102](#L102)).
+- Root cause: mismatch between where the build outputs (artifacts/elgin-tool-gas/dist/public) and the Netlify publish path (dist/public). Also note a sourcemap reporting error during the build in [line 76](#L76) which may cause the build script to exit non-zero; check the tooltip component if that persists: artifacts/elgin-tool-gas/src/components/ui/tooltip.tsx.
+
+Solution
+
+Option A — (recommended) Point Netlify to the actual output folder
+1. Update your netlify.toml (or the Netlify site "Publish directory" setting) to publish the package output directory:
+- Change publish from dist/public to artifacts/elgin-tool-gas/dist/public.
+
+Example netlify.toml snippet:
+```toml
+[build]
+  command = "pnpm run build:netlify"
+  publish = "artifacts/elgin-tool-gas/dist/public"
+```
+
+Commit that change and redeploy.
+
+Option B — Make the package write to the repo-root publish directory instead
+1. If you prefer keeping Netlify publish as dist/public, configure Vite in the package to output to the repo-root path. In artifacts/elgin-tool-gas/vite.config.ts (or where you set Vite build options) set build.outDir to "../../dist/public" (path relative to artifacts/elgin-tool-gas):
+```ts
+// vite.config.ts
+export default defineConfig({
+  // ...
+  build: {
+    outDir: '../../dist/public',
+    // optionally disable sourcemaps if they're causing failures:
+    // sourcemap: false,
+  },
+});
+```
+2. Rebuild and Netlify will find dist/public at the repo root.
+
+Extra note about the sourcemap error
+- The log shows a sourcemap reporting error for the tooltip component: [line 76](#L76). If your build is still failing (exit non-zero) after fixing the publish path, inspect or temporarily disable sourcemaps:
+  - Check the file artifacts/elgin-tool-gas/src/components/ui/tooltip.tsx: https://github.com/Kurtis35/Elgin-Industrial-Hub/blob/main/artifacts/elgin-tool-gas/src/components/ui/tooltip.tsx
+  - Or disable sourcemaps in vite.config.ts with build.sourcemap = false to see whether that removes the non-zero exit.
+
+What to change now
+- Easiest/faster: change netlify.toml publish to artifacts/elgin-tool-gas/dist/public and redeploy.
+- If you change publish or outDir, confirm the folder exists after a local build (pnpm run build:netlify) before pushing.
+
+Relevant log lines
+- Build invoked for the package: [line 71](#L71)-[line 72](#L72)
+- Sourcemap error: [line 76](#L76)
+- Dist listing produced by Vite (generated folder): [line 79](#L79)-[line 81](#L81)
+- Netlify publish path configured to repo root (missing): [line 101](#L101)-[line 102](#L102) and failing message at [line 95](#L95)
+
+The relevant error logs are:
+
+Line 0: build-image version: a0bc76c99cbadd99a168cf193f4d4df9fa7ee94a (noble-new-builds)
+Line 1: buildbot version: fbebc7d9335e413478334a6e6a4e8e1087eed35b
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/Kurtis35/Elgin-Industrial-Hub
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Installing dependencies
+Line 9: mise [36m~/.config/mise/config.toml[0m tools: [34mpython[0m@3.14.3
+Line 10: mise [36m~/.config/mise/config.toml[0m tools: [34mruby[0m@3.4.8
+Line 11: mise [36m~/.config/mise/config.toml[0m tools: [34mgo[0m@1.26.1
+Line 12: Downloading and installing node v22.22.2...
+Line 13: Downloading https://nodejs.org/dist/v22.22.2/node-v22.22.2-linux-x64.tar.xz...
+Line 65: [96m[1mbuild.command from netlify.toml                               [22m[39m
+Line 66: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 67: ​
+Line 68: [36m$ pnpm run build:netlify[39m
+Line 69: > workspace@0.0.0 build:netlify /opt/build/repo
+Line 70: > pnpm --filter @workspace/elgin-tool-gas run build:netlify
+Line 71: > @workspace/elgin-tool-gas@0.0.0 build:netlify /opt/build/repo/artifacts/elgin-tool-gas
+Line 72: > BASE_PATH=/ vite build --config vite.config.ts
+Line 73: [36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+Line 74: transforming...
+Line 75: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 76: [33msrc/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of 
+Line 77: rendering chunks...
+Line 78: computing gzip size...
+Line 79: [2mdist/public/[22m[32mindex.html                 [39m[1m[2m  2.78 kB[22m[1m[22m[2m │ gzip:   1.02 kB[22m
+Line 80: [2mdist/public/[22m[2massets/[22m[35mindex-BpxDFElk.css  [39m[1m[2m110.47 kB[22m[1m[22m[2m │ gzip:  17.82 kB[22m
+Line 81: [2mdist/public/[22m[2massets/[22m[36mindex-BQpUVs4-.js   [39m[1m[2m465.86 kB[22m[1m[22m[2m │ gzip: 148.24 kB[22m
+Line 82: [32m✓ built in 3.37s[39m
+Line 83: ​
+Line 84: [90m(build.command completed in 4.4s)[39m
+Line 85: [96m[1m​[22m[39m
+Line 86: [96m[1mDeploy site                                                   [22m[39m
+Line 87: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 88: ​
+Line 89: Section completed: deploying
+Line 90: [91m[1m​[22m[39m
+Line 91: [91m[1mConfiguration error                                           [22m[39m
+Line 92: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 93: ​
+Line 94:   [31m[1mError message[22m[39m
+Line 95:   Deploy did not succeed: Deploy directory 'dist/public' does not exist
+Line 96: ​
+Line 97:   [31m[1mResolved config[22m[39m
+Line 98:   build:
+Line 99:     command: pnpm run build:netlify
+Line 100:     commandOrigin: config
+Line 101:     publish: /opt/build/repo/dist/public
+Line 102:     publishOrigin: config
+Line 103:   redirects:
+Line 104:     - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+Line 105: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 106: Failing build: Failed to build site
+Line 107: Finished processing build request in 20.276s
