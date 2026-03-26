@@ -1,0 +1,8 @@
+[build]
+  command = "pnpm run build:netlify"
+  publish = "artifacts/elgin-tool-gas/dist/public"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
