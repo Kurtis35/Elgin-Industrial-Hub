@@ -100,7 +100,7 @@ export default function ServiceAreas() {
             </div>
           </div>
           <motion.a
-            href="https://wa.me/27000000000?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20delivery%20to%20my%20area."
+            href="https://wa.me/27795849684?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20delivery%20to%20my%20area."
             target="_blank"
             rel="noopener noreferrer"
             className="btn-orange text-white font-bold px-7 py-3 rounded-xl whitespace-nowrap flex-shrink-0"

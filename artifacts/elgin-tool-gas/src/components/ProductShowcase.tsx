@@ -110,7 +110,7 @@ export default function ProductShowcase() {
               </ul>
               <div className="mt-5 pt-4 border-t border-white/10">
                 <a
-                  href="https://wa.me/27000000000?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%27d%20like%20to%20enquire%20about%20pricing."
+                  href="https://wa.me/27795849684?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%27d%20like%20to%20enquire%20about%20pricing."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-orange-400 hover:text-orange-300 text-sm font-semibold transition-colors flex items-center gap-1 group-hover:gap-2"

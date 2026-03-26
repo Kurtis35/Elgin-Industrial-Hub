@@ -44,14 +44,14 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-3">
               <a
-                href="tel:+27000000000"
+                href="tel:+27795849684"
                 className="flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors text-sm"
               >
                 <Phone size={15} className="text-orange-500" />
-                +27 000 000 0000
+                +27 79 584 9684
               </a>
               <a
-                href="https://wa.me/27000000000"
+                href="https://wa.me/27795849684"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors text-sm"

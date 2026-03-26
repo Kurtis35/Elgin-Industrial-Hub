@@ -71,7 +71,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <motion.a
-            href="tel:+27000000000"
+            href="tel:+27795849684"
             className="btn-orange flex items-center gap-3 text-white font-bold px-8 py-4 rounded-xl text-lg w-full sm:w-auto justify-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -81,7 +81,7 @@ export default function Hero() {
           </motion.a>
 
           <motion.a
-            href="https://wa.me/27000000000?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%27d%20like%20to%20enquire%20about%20your%20services."
+            href="https://wa.me/27795849684?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%27d%20like%20to%20enquire%20about%20your%20services."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold px-8 py-4 rounded-xl text-lg transition-all duration-300 w-full sm:w-auto justify-center"

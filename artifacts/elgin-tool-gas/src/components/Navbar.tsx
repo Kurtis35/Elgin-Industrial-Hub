@@ -68,7 +68,7 @@ export default function Navbar() {
               </button>
             ))}
             <motion.a
-              href="tel:+27000000000"
+              href="tel:+27795849684"
               className="btn-orange text-white text-sm font-semibold px-5 py-2 rounded-lg tracking-wide"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -105,7 +105,7 @@ export default function Navbar() {
                 </button>
               ))}
               <a
-                href="tel:+27000000000"
+                href="tel:+27795849684"
                 className="btn-orange text-white text-sm font-semibold px-5 py-3 rounded-lg text-center mt-2"
               >
                 Call Now

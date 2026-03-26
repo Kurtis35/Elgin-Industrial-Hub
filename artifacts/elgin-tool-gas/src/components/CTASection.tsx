@@ -54,7 +54,7 @@ export default function CTASection() {
           className="flex flex-col sm:flex-row gap-5 justify-center items-center"
         >
           <motion.a
-            href="tel:+27000000000"
+            href="tel:+27795849684"
             className="btn-orange flex items-center gap-3 text-white font-bold px-10 py-5 rounded-xl text-xl w-full sm:w-auto justify-center shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -64,7 +64,7 @@ export default function CTASection() {
           </motion.a>
 
           <motion.a
-            href="https://wa.me/27000000000?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%20need%20a%20gas%20delivery%20today.%20Can%20you%20help%3F"
+            href="https://wa.me/27795849684?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%20need%20a%20gas%20delivery%20today.%20Can%20you%20help%3F"
             target="_blank"
             rel="noopener noreferrer"
             className="whatsapp-btn flex items-center gap-3 text-white font-bold px-10 py-5 rounded-xl text-xl w-full sm:w-auto justify-center"
