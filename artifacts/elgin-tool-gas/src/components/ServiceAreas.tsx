@@ -29,7 +29,7 @@ export default function ServiceAreas() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="areas" className="py-24 bg-zinc-950 relative">
+    <section id="areas" className="py-24 bg-gray-50 relative">
       <div className="section-divider absolute top-0 left-0 right-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
@@ -42,10 +42,10 @@ export default function ServiceAreas() {
           <span className="text-orange-500 font-semibold tracking-widest uppercase text-sm mb-3 block">
             Where We Deliver
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
             Service <span className="text-orange-500">Areas</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             We proudly serve the entire Elgin Valley and surrounding regions with fast, reliable deliveries.
           </p>
         </motion.div>
@@ -57,19 +57,19 @@ export default function ServiceAreas() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="card-hover bg-zinc-900 border border-zinc-800 rounded-2xl p-7 group"
+              className="card-hover bg-white border border-gray-200 rounded-2xl p-7 group shadow-sm"
             >
               <div className="flex items-start gap-3 mb-4">
                 <div className="w-12 h-12 bg-orange-500/15 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/25 transition-colors">
                   <MapPin size={24} className="text-orange-500" />
                 </div>
                 <div>
-                  <h3 className="text-white font-black text-xl">{area.name}</h3>
+                  <h3 className="text-gray-900 font-black text-xl">{area.name}</h3>
                   <div className="flex flex-wrap gap-1.5 mt-1.5">
                     {area.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs bg-orange-500/15 text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded-full font-medium"
+                        className="text-xs bg-orange-500/15 text-orange-500 border border-orange-500/20 px-2 py-0.5 rounded-full font-medium"
                       >
                         {tag}
                       </span>
@@ -77,7 +77,7 @@ export default function ServiceAreas() {
                   </div>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed">{area.description}</p>
+              <p className="text-gray-500 text-sm leading-relaxed">{area.description}</p>
             </motion.div>
           ))}
         </div>
@@ -93,8 +93,8 @@ export default function ServiceAreas() {
               <Truck size={28} className="text-orange-500" />
             </div>
             <div>
-              <h3 className="text-white font-bold text-lg">Outside Our Delivery Zone?</h3>
-              <p className="text-gray-400 text-sm mt-1">
+              <h3 className="text-gray-900 font-bold text-lg">Outside Our Delivery Zone?</h3>
+              <p className="text-gray-500 text-sm mt-1">
                 Contact us — we may still be able to arrange delivery or collection.
               </p>
             </div>

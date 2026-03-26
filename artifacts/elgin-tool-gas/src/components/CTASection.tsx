@@ -8,12 +8,12 @@ export default function CTASection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-24 bg-black relative overflow-hidden" id="contact">
+    <section className="py-24 bg-white relative overflow-hidden" id="contact">
       <div className="absolute inset-0 industrial-bg" />
 
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-600/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-600/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10" ref={ref}>
@@ -32,7 +32,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
+          className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 leading-tight"
         >
           Need Gas Delivered{" "}
           <span className="text-orange-500 orange-glow">Today?</span>
@@ -42,7 +42,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-gray-400 text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-gray-500 text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
         >
           Don't run out of gas. Contact Jeremy directly for fast, reliable gas delivery and industrial supplies to Grabouw, Botriver, and Villiersdorp.
         </motion.p>

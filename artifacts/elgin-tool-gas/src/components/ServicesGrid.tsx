@@ -53,7 +53,7 @@ export default function ServicesGrid() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-24 bg-black relative industrial-bg">
+    <section id="services" className="py-24 bg-white relative industrial-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,10 +64,10 @@ export default function ServicesGrid() {
           <span className="text-orange-500 font-semibold tracking-widest uppercase text-sm mb-3 block">
             What We Offer
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
             Our <span className="text-orange-500">Services</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             Everything you need for industrial, agricultural, and commercial operations — all under one roof.
           </p>
         </motion.div>
@@ -84,7 +84,7 @@ export default function ServicesGrid() {
                 className={`card-hover relative rounded-2xl p-7 border group overflow-hidden ${
                   service.highlight
                     ? "bg-orange-500/10 border-orange-500/40"
-                    : "bg-zinc-900 border-zinc-800"
+                    : "bg-gray-50 border-gray-200"
                 }`}
               >
                 {service.highlight && (
@@ -106,8 +106,8 @@ export default function ServicesGrid() {
                     className={service.highlight ? "text-orange-400" : "text-orange-500"}
                   />
                 </div>
-                <h3 className="text-white font-bold text-xl mb-3">{service.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                <h3 className="text-gray-900 font-bold text-xl mb-3">{service.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{service.description}</p>
               </motion.div>
             );
           })}

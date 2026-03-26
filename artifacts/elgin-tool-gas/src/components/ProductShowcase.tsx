@@ -7,8 +7,8 @@ const products = [
     category: "Gas Cylinders",
     items: ["Afrox LPG Cylinders", "Braai Gas", "Industrial Gas", "CO2 Cylinders"],
     emoji: "🔵",
-    color: "from-blue-500/20 to-blue-600/5",
-    border: "border-blue-500/20",
+    color: "from-blue-500/10 to-blue-600/5",
+    border: "border-blue-200",
     tag: "Most Popular",
     tagColor: "bg-blue-500",
   },
@@ -16,8 +16,8 @@ const products = [
     category: "Welding Tools",
     items: ["MIG Welders", "Angle Grinders", "Welding Rods", "Safety Goggles"],
     emoji: "🔧",
-    color: "from-orange-500/20 to-orange-600/5",
-    border: "border-orange-500/30",
+    color: "from-orange-500/10 to-orange-600/5",
+    border: "border-orange-200",
     tag: "In Stock",
     tagColor: "bg-orange-500",
   },
@@ -25,8 +25,8 @@ const products = [
     category: "Safety Gear",
     items: ["Hard Hats", "Safety Boots", "Gloves & PPE", "Reflective Clothing"],
     emoji: "🦺",
-    color: "from-yellow-500/20 to-yellow-600/5",
-    border: "border-yellow-500/20",
+    color: "from-yellow-500/10 to-yellow-600/5",
+    border: "border-yellow-200",
     tag: "Compliant",
     tagColor: "bg-yellow-600",
   },
@@ -34,8 +34,8 @@ const products = [
     category: "Power Tools",
     items: ["Drills & Drivers", "Jigsaws", "Sanders", "Circular Saws"],
     emoji: "⚡",
-    color: "from-purple-500/20 to-purple-600/5",
-    border: "border-purple-500/20",
+    color: "from-purple-500/10 to-purple-600/5",
+    border: "border-purple-200",
     tag: "Pro Grade",
     tagColor: "bg-purple-600",
   },
@@ -43,17 +43,17 @@ const products = [
     category: "Abrasives",
     items: ["Cutting Discs", "Grinding Wheels", "Flap Discs", "Wire Brushes"],
     emoji: "⚙️",
-    color: "from-gray-500/20 to-gray-600/5",
-    border: "border-gray-500/20",
+    color: "from-gray-500/10 to-gray-600/5",
+    border: "border-gray-200",
     tag: "All Sizes",
-    tagColor: "bg-gray-600",
+    tagColor: "bg-gray-500",
   },
   {
     category: "Workshop Gear",
     items: ["Compressors", "Chain Hoists", "Workbenches", "Tool Storage"],
     emoji: "🏭",
-    color: "from-green-500/20 to-green-600/5",
-    border: "border-green-500/20",
+    color: "from-green-500/10 to-green-600/5",
+    border: "border-green-200",
     tag: "Heavy Duty",
     tagColor: "bg-green-700",
   },
@@ -64,7 +64,7 @@ export default function ProductShowcase() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="products" className="py-24 bg-black">
+    <section id="products" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,10 +75,10 @@ export default function ProductShowcase() {
           <span className="text-orange-500 font-semibold tracking-widest uppercase text-sm mb-3 block">
             Our Stock
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">
             Product <span className="text-orange-500">Showcase</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             A snapshot of what we carry. Contact us for availability, pricing, and custom orders.
           </p>
         </motion.div>
@@ -99,21 +99,21 @@ export default function ProductShowcase() {
               </div>
 
               <div className="text-4xl mb-4">{product.emoji}</div>
-              <h3 className="text-white font-black text-xl mb-4">{product.category}</h3>
+              <h3 className="text-gray-900 font-black text-xl mb-4">{product.category}</h3>
               <ul className="space-y-2">
                 {product.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-gray-400 text-sm">
+                  <li key={item} className="flex items-center gap-2 text-gray-600 text-sm">
                     <span className="w-1.5 h-1.5 bg-orange-500 rounded-full flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 pt-4 border-t border-white/10">
+              <div className="mt-5 pt-4 border-t border-gray-200">
                 <a
                   href="https://wa.me/27795849684?text=Hi%20Elgin%20Tool%20and%20Gas%2C%20I%27d%20like%20to%20enquire%20about%20pricing."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-orange-400 hover:text-orange-300 text-sm font-semibold transition-colors flex items-center gap-1 group-hover:gap-2"
+                  className="text-orange-500 hover:text-orange-600 text-sm font-semibold transition-colors flex items-center gap-1 group-hover:gap-2"
                 >
                   Enquire Now <span>→</span>
                 </a>

@@ -34,7 +34,7 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-black/95 backdrop-blur-md border-b border-orange-500/20 shadow-lg shadow-black/50"
+          ? "bg-white/95 backdrop-blur-md border-b border-orange-500/20 shadow-lg shadow-black/10"
           : "bg-transparent"
       }`}
     >
@@ -48,7 +48,7 @@ export default function Navbar() {
               <Flame size={18} className="text-white" />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-white font-bold text-sm md:text-base tracking-wide">
+              <span className="text-gray-900 font-bold text-sm md:text-base tracking-wide">
                 Elgin Tool
               </span>
               <span className="text-orange-500 font-bold text-sm md:text-base tracking-wide -mt-1">
@@ -62,7 +62,7 @@ export default function Navbar() {
               <button
                 key={link.href}
                 onClick={() => handleLinkClick(link.href)}
-                className="text-gray-300 hover:text-orange-400 text-sm font-medium transition-colors duration-200 tracking-wide uppercase"
+                className="text-gray-600 hover:text-orange-500 text-sm font-medium transition-colors duration-200 tracking-wide uppercase"
               >
                 {link.label}
               </button>
@@ -78,7 +78,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden text-gray-900 p-2"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -92,14 +92,14 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/98 backdrop-blur-md border-t border-orange-500/20"
+            className="md:hidden bg-white/98 backdrop-blur-md border-t border-orange-500/20"
           >
             <div className="px-4 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleLinkClick(link.href)}
-                  className="text-gray-300 hover:text-orange-400 text-base font-medium py-2 text-left transition-colors"
+                  className="text-gray-600 hover:text-orange-500 text-base font-medium py-2 text-left transition-colors"
                 >
                   {link.label}
                 </button>

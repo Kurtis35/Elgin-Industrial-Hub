@@ -35,7 +35,7 @@ export default function TrustSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="trust" className="py-20 bg-zinc-950 relative">
+    <section id="trust" className="py-20 bg-gray-50 relative">
       <div className="section-divider absolute top-0 left-0 right-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
@@ -45,11 +45,11 @@ export default function TrustSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-3">
             Why Choose{" "}
             <span className="text-orange-500">Elgin Tool & Gas</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             Your trusted industrial partner in the Elgin Valley for over two decades
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ export default function TrustSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="card-hover bg-zinc-900 border border-zinc-800 rounded-2xl p-7 text-center group"
+                className="card-hover bg-white border border-gray-200 rounded-2xl p-7 text-center group shadow-sm"
               >
                 <div className="flex justify-center mb-4">
                   <div className="w-14 h-14 bg-orange-500/15 rounded-xl flex items-center justify-center group-hover:bg-orange-500/25 transition-colors duration-300">
@@ -71,8 +71,8 @@ export default function TrustSection() {
                   </div>
                 </div>
                 <div className="text-3xl font-black text-orange-500 mb-1">{item.value}</div>
-                <div className="text-white font-bold text-lg mb-3">{item.label}</div>
-                <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                <div className="text-gray-900 font-bold text-lg mb-3">{item.label}</div>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
               </motion.div>
             );
           })}
